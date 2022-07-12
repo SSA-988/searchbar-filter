@@ -7,18 +7,18 @@ const List = ({ searchPhrase, setClicked, data }) => {
     if (searchPhrase === "") {
       return (
         <View style={styles.item}>
-          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.title}>{item}</Text>
         </View>
       );
     }
     if (
-      item.name
+      item
         .toLowerCase()
-        .includes(searchPhrase.toLowerCase().trim().replace(/\s/g, ""))
+        .includes(searchPhrase.toLowerCase())
     ) {
       return (
         <View style={styles.item}>
-          <Text style={styles.title}>{item.name}</Text>
+          <Text style={styles.title}>{item}</Text>
         </View>
       );
     }
@@ -26,17 +26,13 @@ const List = ({ searchPhrase, setClicked, data }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        onStartShouldSetResponder={() => {
-          setClicked(false);
-        }}
-      >
+     
         <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
-      </View>
+    
     </SafeAreaView>
   );
 };

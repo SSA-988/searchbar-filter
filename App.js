@@ -1,5 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 import SearchBar from "./SearchBar";
 import List from "./List";
@@ -7,7 +14,7 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   // var randomWords = require('random-words');
-  // console.log(randomWords());
+  // const newWord = randomWords();
   const words = [
     {
       name: "hello program",
@@ -32,6 +39,14 @@ export default function App() {
   ];
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
+  const [wordss, newWords] = useState([]);
+  const addnewWord = () => {
+    var randomWords = require("random-words");
+    const newWord = randomWords();
+    console.log(newWord)
+    newWords([...wordss, newWord]);
+  };
+  console.log("arra of words",wordss);
   return (
     <SafeAreaView style={styles.root}>
       <SearchBar
@@ -40,8 +55,16 @@ export default function App() {
         clicked={clicked}
         setClicked={setClicked}
       />
+      <Pressable
+        onPress={addnewWord}
+        style={{ backgroundColor: "green", padding: 10, margin: 10 }}
+      >
+        <Text style={{ textAlign: "center", color: "white" }}>
+          ADD NEW WORD
+        </Text>
+      </Pressable>
 
-      <List searchPhrase={searchPhrase} data={words} setClicked={setClicked} />
+      <List searchPhrase={searchPhrase} data={wordss} setClicked={setClicked} />
     </SafeAreaView>
   );
 }
